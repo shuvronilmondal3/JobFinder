@@ -19,7 +19,11 @@ import {
   Bell, 
   Lock, 
   LogOut,
-  Save
+  Save,
+  Globe,
+  Eye,
+  Share,
+  Briefcase
 } from "lucide-react";
 
 export default function Settings() {
@@ -28,6 +32,13 @@ export default function Settings() {
     push: false,
     weekly: true,
     marketing: false,
+  });
+
+  const [privacy, setPrivacy] = useState({
+    profileVisible: true,
+    showEmail: false,
+    showPhone: false,
+    allowRecruiters: true,
   });
 
   return (
@@ -40,18 +51,18 @@ export default function Settings() {
           </p>
         </div>
 
-        <Tabs defaultValue="profile" className="w-full">
+        <Tabs defaultValue="account" className="w-full">
           <TabsList className="grid w-full grid-cols-4 max-w-2xl">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
-            <TabsTrigger value="security">Security</TabsTrigger>
-            <TabsTrigger value="advanced">Advanced</TabsTrigger>
+            <TabsTrigger value="privacy">Privacy</TabsTrigger>
+            <TabsTrigger value="preferences">Job Preferences</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="profile" className="mt-4 space-y-4">
+          <TabsContent value="account" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Profile Information</CardTitle>
+                <CardTitle>Account Information</CardTitle>
                 <CardDescription>
                   Update your personal information
                 </CardDescription>
@@ -72,16 +83,16 @@ export default function Settings() {
                   <Input id="email" type="email" placeholder="john.doe@example.com" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="department">Department</Label>
-                  <Input id="department" placeholder="Computer Science" />
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input id="phone" placeholder="+1 (555) 123-4567" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
-                  <Input id="title" placeholder="Professor" />
+                  <Label htmlFor="location">Location</Label>
+                  <Input id="location" placeholder="San Francisco, CA" />
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">
                   <Save className="mr-2 h-4 w-4" />
                   Save changes
                 </Button>
@@ -94,15 +105,15 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle>Notification Settings</CardTitle>
                 <CardDescription>
-                  Manage how you receive notifications
+                  Manage how you receive notifications about jobs and opportunities
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between space-y-1">
                   <div className="space-y-1">
-                    <p className="font-medium leading-none">Email notifications</p>
+                    <p className="font-medium leading-none">Job alerts</p>
                     <p className="text-sm text-muted-foreground">
-                      Receive notifications via email
+                      Receive notifications about new job opportunities matching your preferences
                     </p>
                   </div>
                   <Switch 
@@ -112,9 +123,9 @@ export default function Settings() {
                 </div>
                 <div className="flex items-center justify-between space-y-1">
                   <div className="space-y-1">
-                    <p className="font-medium leading-none">Push notifications</p>
+                    <p className="font-medium leading-none">Application updates</p>
                     <p className="text-sm text-muted-foreground">
-                      Receive push notifications in your browser
+                      Receive updates about your job applications and interviews
                     </p>
                   </div>
                   <Switch 
@@ -124,9 +135,9 @@ export default function Settings() {
                 </div>
                 <div className="flex items-center justify-between space-y-1">
                   <div className="space-y-1">
-                    <p className="font-medium leading-none">Weekly digest</p>
+                    <p className="font-medium leading-none">Weekly job digest</p>
                     <p className="text-sm text-muted-foreground">
-                      Receive a summary of activities every week
+                      Receive a weekly summary of jobs matching your profile
                     </p>
                   </div>
                   <Switch 
@@ -136,9 +147,9 @@ export default function Settings() {
                 </div>
                 <div className="flex items-center justify-between space-y-1">
                   <div className="space-y-1">
-                    <p className="font-medium leading-none">Marketing emails</p>
+                    <p className="font-medium leading-none">Career tips and resources</p>
                     <p className="text-sm text-muted-foreground">
-                      Receive emails about new features and opportunities
+                      Receive emails about career development and industry insights
                     </p>
                   </div>
                   <Switch 
@@ -148,7 +159,7 @@ export default function Settings() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">
                   <Save className="mr-2 h-4 w-4" />
                   Save preferences
                 </Button>
@@ -156,30 +167,107 @@ export default function Settings() {
             </Card>
           </TabsContent>
           
-          <TabsContent value="security" className="mt-4 space-y-4">
+          <TabsContent value="privacy" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Security Settings</CardTitle>
+                <CardTitle>Privacy Settings</CardTitle>
+                <CardDescription>
+                  Control who can see your profile and contact information
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between space-y-1">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Eye className="h-4 w-4" />
+                      <p className="font-medium leading-none">Profile visibility</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Make your profile visible to employers and recruiters
+                    </p>
+                  </div>
+                  <Switch 
+                    checked={privacy.profileVisible} 
+                    onCheckedChange={(checked) => setPrivacy({...privacy, profileVisible: checked})} 
+                  />
+                </div>
+                <div className="flex items-center justify-between space-y-1">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Globe className="h-4 w-4" />
+                      <p className="font-medium leading-none">Show email address</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Allow employers to see your email address
+                    </p>
+                  </div>
+                  <Switch 
+                    checked={privacy.showEmail} 
+                    onCheckedChange={(checked) => setPrivacy({...privacy, showEmail: checked})} 
+                  />
+                </div>
+                <div className="flex items-center justify-between space-y-1">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Globe className="h-4 w-4" />
+                      <p className="font-medium leading-none">Show phone number</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Allow employers to see your phone number
+                    </p>
+                  </div>
+                  <Switch 
+                    checked={privacy.showPhone} 
+                    onCheckedChange={(checked) => setPrivacy({...privacy, showPhone: checked})} 
+                  />
+                </div>
+                <div className="flex items-center justify-between space-y-1">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Share className="h-4 w-4" />
+                      <p className="font-medium leading-none">Recruiter messages</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Allow recruiters to contact you about job opportunities
+                    </p>
+                  </div>
+                  <Switch 
+                    checked={privacy.allowRecruiters} 
+                    onCheckedChange={(checked) => setPrivacy({...privacy, allowRecruiters: checked})} 
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  <Save className="mr-2 h-4 w-4" />
+                  Save privacy settings
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Security</CardTitle>
                 <CardDescription>
                   Manage your password and security settings
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="current">Current password</Label>
-                  <Input id="current" type="password" />
+                  <Label htmlFor="current-password">Current password</Label>
+                  <Input id="current-password" type="password" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="new">New password</Label>
-                  <Input id="new" type="password" />
+                  <Label htmlFor="new-password">New password</Label>
+                  <Input id="new-password" type="password" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirm">Confirm password</Label>
-                  <Input id="confirm" type="password" />
+                  <Label htmlFor="confirm-password">Confirm password</Label>
+                  <Input id="confirm-password" type="password" />
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">
                   <Lock className="mr-2 h-4 w-4" />
                   Update password
                 </Button>
@@ -187,18 +275,83 @@ export default function Settings() {
             </Card>
           </TabsContent>
           
-          <TabsContent value="advanced" className="mt-4 space-y-4">
+          <TabsContent value="preferences" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Advanced Settings</CardTitle>
+                <CardTitle>Job Preferences</CardTitle>
                 <CardDescription>
-                  Manage advanced settings for your account
+                  Set your preferences to receive better job matches
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
+                  <Label htmlFor="job-title">Desired job title</Label>
+                  <Input id="job-title" placeholder="Software Engineer" />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="job-type">Job type</Label>
+                  <select id="job-type" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option>Full-time</option>
+                    <option>Part-time</option>
+                    <option>Contract</option>
+                    <option>Freelance</option>
+                    <option>Internship</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="location-preference">Preferred location</Label>
+                  <Input id="location-preference" placeholder="San Francisco, CA" />
+                </div>
+                
+                <div className="flex items-center justify-between space-y-1">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Briefcase className="h-4 w-4" />
+                      <p className="font-medium leading-none">Remote work</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Show remote job opportunities
+                    </p>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="salary">Minimum salary expectation</Label>
+                  <select id="salary" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option>No preference</option>
+                    <option>$40,000+</option>
+                    <option>$60,000+</option>
+                    <option>$80,000+</option>
+                    <option>$100,000+</option>
+                    <option>$120,000+</option>
+                    <option>$150,000+</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="industries">Preferred industries</Label>
+                  <Input id="industries" placeholder="Technology, Healthcare, Finance" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  <Save className="mr-2 h-4 w-4" />
+                  Save job preferences
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Advanced Settings</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
                   <Label>Data Export</Label>
-                  <Button variant="outline" className="w-full">Export all data</Button>
+                  <Button variant="outline" className="w-full">Export profile data</Button>
                 </div>
                 <div className="space-y-2">
                   <Label>Account Actions</Label>

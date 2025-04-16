@@ -21,17 +21,17 @@ export function ActivityItem({
   className,
 }: ActivityItemProps) {
   return (
-    <div className={cn("flex items-start gap-4 rounded-lg p-3", className)}>
+    <div className={cn("flex items-start gap-4 rounded-lg p-3 hover:bg-muted/50 transition-colors", className)}>
       <div
         className={cn(
           "mt-1 flex h-8 w-8 items-center justify-center rounded-full",
-          categoryColor ? categoryColor : "bg-secondary"
+          categoryColor ? categoryColor : "bg-blue-100"
         )}
       >
         <Icon className="h-4 w-4 text-white" />
       </div>
       <div className="flex-1 space-y-1">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between">
           <p className="text-sm font-medium leading-none">{title}</p>
           <div className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-semibold">
             {timestamp}
