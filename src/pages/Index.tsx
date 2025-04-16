@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { CardStats } from "@/components/ui/card-stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,15 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ActivityItem } from "@/components/ui/activity-item";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Briefcase, MapPin, Clock, Trending } from "lucide-react";
+import { Search, Briefcase, MapPin, Clock, TrendingUp } from "lucide-react";
 
 export default function Index() {
   // Mock data for the career platform
   const careerStats = [
-    { title: "Active Jobs", value: "2,450+", trend: "+12%", color: "#3498db" },
-    { title: "Companies", value: "580", trend: "+5%", color: "#2ecc71" },
-    { title: "Internships", value: "890", trend: "+15%", color: "#9b59b6" },
-    { title: "Placements", value: "76%", trend: "+8%", color: "#e74c3c" },
+    { title: "Active Jobs", value: "2,450+", trend: { value: 12, positive: true }, color: "#3498db" },
+    { title: "Companies", value: "580", trend: { value: 5, positive: true }, color: "#2ecc71" },
+    { title: "Internships", value: "890", trend: { value: 15, positive: true }, color: "#9b59b6" },
+    { title: "Placements", value: "76%", trend: { value: 8, positive: true }, color: "#e74c3c" },
   ];
 
   const featuredJobs = [
@@ -69,7 +68,7 @@ export default function Index() {
       categoryColor: "bg-blue-500",
     },
     {
-      icon: Trending,
+      icon: TrendingUp,
       title: "New skill match: Machine Learning",
       description: "5 new jobs match your ML skills. Update your profile to increase visibility.",
       timestamp: "5h ago",
