@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -6,6 +7,7 @@ import {
   Settings,
   Menu,
   X,
+  Rocket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -22,6 +24,12 @@ const navItems: NavItem[] = [
     title: "Dashboard",
     icon: <BarChart3 className="h-5 w-5" />,
     href: "/",
+  },
+  {
+    title: "Startups",
+    icon: <Rocket className="h-5 w-5" />,
+    href: "/startups",
+    color: "text-[hsl(var(--startup))]",
   },
   {
     title: "Settings",
