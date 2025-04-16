@@ -10,7 +10,6 @@ import Internships from "./pages/Internships";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
-import Research from "./pages/Research";
 import Startups from "./pages/Startups";
 
 const queryClient = new QueryClient();
@@ -27,7 +26,6 @@ const App = () => (
           <Route path="/internships" element={<Internships />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/research" element={<Research />} />
           <Route path="/startups" element={<Startups />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

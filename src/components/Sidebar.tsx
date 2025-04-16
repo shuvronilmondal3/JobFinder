@@ -1,12 +1,7 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
-  BookOpen,
-  Award,
-  Lightbulb,
-  Rocket,
   BarChart3,
   Settings,
   Menu,
@@ -27,30 +22,6 @@ const navItems: NavItem[] = [
     title: "Dashboard",
     icon: <BarChart3 className="h-5 w-5" />,
     href: "/",
-  },
-  {
-    title: "Research",
-    icon: <BookOpen className="h-5 w-5" />,
-    href: "/research",
-    color: "text-[hsl(var(--research))]",
-  },
-  {
-    title: "IPR",
-    icon: <Award className="h-5 w-5" />,
-    href: "/ipr",
-    color: "text-[hsl(var(--ipr))]",
-  },
-  {
-    title: "Innovation",
-    icon: <Lightbulb className="h-5 w-5" />,
-    href: "/innovation",
-    color: "text-[hsl(var(--innovation))]",
-  },
-  {
-    title: "Startups",
-    icon: <Rocket className="h-5 w-5" />,
-    href: "/startups",
-    color: "text-[hsl(var(--startup))]",
   },
   {
     title: "Settings",
