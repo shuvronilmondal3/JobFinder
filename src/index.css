@@ -96,10 +96,19 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
 }
 
 .card-gradient {
   @apply bg-gradient-to-br from-card to-secondary/80 backdrop-blur-sm;
+}
+
+/* Add new utility classes */
+.text-gradient {
+  @apply bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent;
+}
+
+.glass {
+  @apply bg-background/60 backdrop-blur-lg border border-border shadow-sm;
 }
