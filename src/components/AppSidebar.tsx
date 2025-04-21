@@ -41,7 +41,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center justify-between">
-            <span>EcoSync Hub</span>
+            <span>JobFinder</span>
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
