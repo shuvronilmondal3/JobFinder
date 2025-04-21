@@ -23,8 +23,11 @@ import {
   Globe,
   Eye,
   Share,
-  Briefcase
+  Briefcase,
+  Sun,
+  Moon
 } from "lucide-react";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -41,14 +44,31 @@ export default function Settings() {
     allowRecruiters: true,
   });
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <Layout>
       <div className="flex flex-col space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-          <p className="text-muted-foreground">
-            Manage your account settings and preferences
-          </p>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+            <p className="text-muted-foreground">
+              Manage your account settings and preferences
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            className="flex items-center gap-2"
+            onClick={toggleTheme}
+            aria-label="Toggle light/dark mode"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+            <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+          </Button>
         </div>
 
         <Tabs defaultValue="account" className="w-full">
