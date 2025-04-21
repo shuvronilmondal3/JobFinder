@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Briefcase, MapPin, Clock, TrendingUp } from "lucide-react";
 
 export default function Index() {
-  // Mock data for the career platform
   const careerStats = [
     { title: "Active Jobs", value: "2,450+", trend: { value: 12, positive: true }, color: "#3498db" },
     { title: "Companies", value: "580", trend: { value: 5, positive: true }, color: "#2ecc71" },
@@ -93,25 +92,23 @@ export default function Index() {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
-            <div className="max-w-3xl space-y-4">
-              <h2 className="text-2xl font-bold">Find Your Dream Career</h2>
-              <p className="opacity-90">
-                Let our AI match you with perfect opportunities based on your skills, preferences, and career goals
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="relative flex-grow">
-                  <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <Input 
-                    className="pl-10 h-12 w-full bg-white text-black" 
-                    placeholder="Job titles, skills, or keywords"
-                  />
-                </div>
-                <Button className="h-12 bg-white text-blue-600 hover:bg-gray-100">
-                  Find Jobs
-                </Button>
+        <div className="relative rounded-lg bg-background/60 backdrop-blur-md border border-border p-6 text-foreground">
+          <div className="max-w-3xl space-y-4">
+            <h2 className="text-2xl font-bold">Find Your Dream Career</h2>
+            <p className="opacity-90">
+              Let our AI match you with perfect opportunities based on your skills, preferences, and career goals
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-grow">
+                <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+                <Input 
+                  className="pl-10 h-12 w-full bg-background text-foreground" 
+                  placeholder="Job titles, skills, or keywords"
+                />
               </div>
+              <Button className="h-12 bg-primary text-primary-foreground hover:bg-primary/90">
+                Find Jobs
+              </Button>
             </div>
           </div>
         </div>
