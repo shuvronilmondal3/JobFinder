@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -28,6 +27,42 @@ import {
   Moon
 } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+const accountFormSchema = z.object({
+  firstName: z.string().min(2, {
+    message: "First name must be at least 2 characters.",
+  }),
+  lastName: z.string().min(2, {
+    message: "Last name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  phone: z.string().min(10, {
+    message: "Please enter a valid phone number.",
+  }),
+  cgpa: z.string().refine((val) => {
+    const num = parseFloat(val);
+    return !isNaN(num) && num >= 0 && num <= 10;
+  }, {
+    message: "CGPA must be between 0 and 10",
+  }),
+  yearOfPassout: z.string(),
+  experience: z.string(),
+  skills: z.string(),
+});
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -45,6 +80,25 @@ export default function Settings() {
   });
 
   const { theme, toggleTheme } = useTheme();
+
+  const form = useForm({
+    resolver: zodResolver(accountFormSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      cgpa: "",
+      yearOfPassout: "",
+      experience: "",
+      skills: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof accountFormSchema>) => {
+    console.log(data);
+    // Handle form submission here
+  };
 
   return (
     <Layout>
@@ -84,39 +138,167 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle>Account Information</CardTitle>
                 <CardDescription>
-                  Update your personal information
+                  Update your personal information and career details
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First name</Label>
-                    <Input id="firstName" placeholder="Alex" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last name</Label>
-                    <Input id="lastName" placeholder="Bell" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="e@example.com" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
-                  <Input id="phone" placeholder="+91  123-4567" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="location">Location</Label>
-                  <Input id="location" placeholder="Mumbai" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="bg-blue-600 hover:bg-blue-700">
-                  <Save className="mr-2 h-4 w-4" />
-                  Save changes
-                </Button>
-              </CardFooter>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>First name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Alex" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Last name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Smith" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="example@domain.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone Number</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+1 (555) 000-0000" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="cgpa"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>CGPA</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="number" 
+                              step="0.01" 
+                              min="0" 
+                              max="10" 
+                              placeholder="8.50"
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name="yearOfPassout"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Year of Passout</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select year" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((year) => (
+                                  <SelectItem key={year} value={year.toString()}>
+                                    {year}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="experience"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Experience</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select experience" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="fresher">Fresher</SelectItem>
+                                <SelectItem value="0-1">0-1 years</SelectItem>
+                                <SelectItem value="1-2">1-2 years</SelectItem>
+                                <SelectItem value="2-5">2-5 years</SelectItem>
+                                <SelectItem value="5+">5+ years</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="skills"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Skills</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="React, TypeScript, Node.js (comma separated)"
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </CardContent>
+                  <CardFooter>
+                    <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
+                      <Save className="mr-2 h-4 w-4" />
+                      Save changes
+                    </Button>
+                  </CardFooter>
+                </form>
+              </Form>
             </Card>
           </TabsContent>
           
