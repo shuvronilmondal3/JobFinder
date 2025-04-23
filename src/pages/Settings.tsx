@@ -59,9 +59,15 @@ const accountFormSchema = z.object({
   }, {
     message: "CGPA must be between 0 and 10",
   }),
-  yearOfPassout: z.string(),
-  experience: z.string(),
-  skills: z.string(),
+  yearOfPassout: z.string({
+    required_error: "Please select your year of passout",
+  }),
+  experience: z.string({
+    required_error: "Please select your experience level",
+  }),
+  skills: z.string().min(1, {
+    message: "Please enter at least one skill",
+  }),
 });
 
 export default function Settings() {
@@ -142,9 +148,9 @@ export default function Settings() {
                 </CardDescription>
               </CardHeader>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <CardContent className="space-y-6">
+                    <div className="grid gap-6 md:grid-cols-2">
                       <FormField
                         control={form.control}
                         name="firstName"
@@ -180,7 +186,11 @@ export default function Settings() {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="example@domain.com" {...field} />
+                            <Input 
+                              type="email" 
+                              placeholder="alex.smith@example.com" 
+                              {...field} 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -194,26 +204,9 @@ export default function Settings() {
                         <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="+1 (555) 000-0000" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="cgpa"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>CGPA</FormLabel>
-                          <FormControl>
                             <Input 
-                              type="number" 
-                              step="0.01" 
-                              min="0" 
-                              max="10" 
-                              placeholder="8.50"
+                              placeholder="+1 (555) 000-0000"
+                              type="tel"
                               {...field} 
                             />
                           </FormControl>
@@ -222,7 +215,28 @@ export default function Settings() {
                       )}
                     />
 
-                    <div className="grid gap-4 md:grid-cols-2">
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name="cgpa"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>CGPA</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="number" 
+                                step="0.01" 
+                                min="0" 
+                                max="10" 
+                                placeholder="8.50"
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
                       <FormField
                         control={form.control}
                         name="yearOfPassout"
@@ -247,32 +261,32 @@ export default function Settings() {
                           </FormItem>
                         )}
                       />
-
-                      <FormField
-                        control={form.control}
-                        name="experience"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Experience</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select experience" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="fresher">Fresher</SelectItem>
-                                <SelectItem value="0-1">0-1 years</SelectItem>
-                                <SelectItem value="1-2">1-2 years</SelectItem>
-                                <SelectItem value="2-5">2-5 years</SelectItem>
-                                <SelectItem value="5+">5+ years</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
                     </div>
+
+                    <FormField
+                      control={form.control}
+                      name="experience"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Experience</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select experience level" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="fresher">Fresher</SelectItem>
+                              <SelectItem value="0-1">0-1 years</SelectItem>
+                              <SelectItem value="1-2">1-2 years</SelectItem>
+                              <SelectItem value="2-5">2-5 years</SelectItem>
+                              <SelectItem value="5+">5+ years</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
                     <FormField
                       control={form.control}
@@ -286,6 +300,9 @@ export default function Settings() {
                               {...field} 
                             />
                           </FormControl>
+                          <FormDescription>
+                            Enter your skills separated by commas
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
