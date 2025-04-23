@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Startups from "./pages/Startups";
+import Login from "./pages/Login"; // Import Login component
 
 // Optional: A dummy Dashboard component after login
 const Dashboard = () => (
@@ -92,6 +93,28 @@ const App = () => {
               >
                 Internships
               </Link>
+              <Link 
+                to="/startups" 
+                className={`
+                  ${theme === 'dark' 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-gray-700 hover:text-gray-900'
+                  }
+                `}
+              >
+                Startups
+              </Link>
+              <Link 
+                to="/settings" 
+                className={`
+                  ${theme === 'dark' 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-gray-700 hover:text-gray-900'
+                  }
+                `}
+              >
+                Settings
+              </Link>
             </div>
           </nav>
 
@@ -104,6 +127,7 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/startups" element={<Startups />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
