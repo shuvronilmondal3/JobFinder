@@ -40,6 +40,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Upload } from "lucide-react";
 
 const accountFormSchema = z.object({
   firstName: z.string().min(2, {
@@ -69,6 +70,15 @@ const accountFormSchema = z.object({
   skills: z.string().min(1, {
     message: "Please enter at least one skill",
   }),
+  resume: z.instanceof(File).optional().refine(
+    (file) => {
+      if (!file) return true;
+      return file.type === 'application/pdf';
+    },
+    {
+      message: "Please upload a PDF file",
+    }
+  ),
 });
 
 export default function Settings() {
@@ -88,6 +98,8 @@ export default function Settings() {
 
   const { theme, toggleTheme } = useTheme();
 
+  const [selectedResume, setSelectedResume] = useState<string | null>(null);
+
   const form = useForm({
     resolver: zodResolver(accountFormSchema),
     defaultValues: {
@@ -99,12 +111,21 @@ export default function Settings() {
       yearOfPassout: "",
       experience: "",
       skills: "",
+      resume: undefined,
     },
   });
 
   const onSubmit = (data: z.infer<typeof accountFormSchema>) => {
     console.log(data);
     // Handle form submission here
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      form.setValue('resume', file);
+      setSelectedResume(file.name);
+    }
   };
 
   return (
@@ -303,6 +324,36 @@ export default function Settings() {
                           </FormControl>
                           <FormDescription>
                             Enter your skills separated by commas
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="resume"
+                      render={({ field: { onChange, value, ...field } }) => (
+                        <FormItem>
+                          <FormLabel>Resume</FormLabel>
+                          <FormControl>
+                            <div className="flex items-center gap-4">
+                              <Input
+                                type="file"
+                                accept=".pdf"
+                                onChange={handleFileChange}
+                                className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                                {...field}
+                              />
+                              {selectedResume && (
+                                <p className="text-sm text-muted-foreground">
+                                  Selected: {selectedResume}
+                                </p>
+                              )}
+                            </div>
+                          </FormControl>
+                          <FormDescription>
+                            Upload your resume in PDF format
                           </FormDescription>
                           <FormMessage />
                         </FormItem>
