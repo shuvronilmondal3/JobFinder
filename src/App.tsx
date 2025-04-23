@@ -1,8 +1,10 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Link } from "react-router-dom";
+import { useTheme } from "@/hooks/use-theme"; // Import useTheme hook
 
 import Index from "./pages/Index";
 import Jobs from "./pages/Jobs";
@@ -27,37 +29,87 @@ const Dashboard = () => (
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <div className="min-h-screen bg-gray-50">
-        {/* Optional global nav */}
-        <nav className="bg-white shadow px-4 py-3 flex justify-between">
-          <Link to="/" className="font-bold text-xl text-blue-600">JobFinder</Link>
-          <div className="flex gap-4">
-            <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
-            <Link to="/jobs" className="text-gray-700 hover:underline">Jobs</Link>
-            <Link to="/internships" className="text-gray-700 hover:underline">Internships</Link>
-          </div>
-        </nav>
+const App = () => {
+  const { theme } = useTheme(); // Get current theme
 
-        {/* Routes */}
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/internships" element={<Internships />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/startups" element={<Startups />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <div className="min-h-screen bg-gray-50">
+          {/* Dynamic navbar with theme-based styling */}
+          <nav className={`
+            px-4 py-3 flex justify-between
+            ${theme === 'dark' 
+              ? 'bg-gray-900 text-white border-gray-800' 
+              : 'bg-white text-gray-800 border-gray-200'
+            } shadow
+          `}>
+            <Link 
+              to="/" 
+              className={`
+                font-bold text-xl 
+                ${theme === 'dark' 
+                  ? 'text-white hover:text-gray-300' 
+                  : 'text-blue-600 hover:text-blue-700'
+                }
+              `}
+            >
+              JobFinder
+            </Link>
+            <div className="flex gap-4">
+              <Link 
+                to="/login" 
+                className={`
+                  ${theme === 'dark' 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-blue-500 hover:text-blue-600'
+                  }
+                `}
+              >
+                Login
+              </Link>
+              <Link 
+                to="/jobs" 
+                className={`
+                  ${theme === 'dark' 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-gray-700 hover:text-gray-900'
+                  }
+                `}
+              >
+                Jobs
+              </Link>
+              <Link 
+                to="/internships" 
+                className={`
+                  ${theme === 'dark' 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-gray-700 hover:text-gray-900'
+                  }
+                `}
+              >
+                Internships
+              </Link>
+            </div>
+          </nav>
+
+          {/* Routes */}
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/internships" element={<Internships />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/startups" element={<Startups />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
-
