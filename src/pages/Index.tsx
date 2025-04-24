@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ActivityItem } from "@/components/ui/activity-item";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Briefcase, MapPin, Clock, TrendingUp } from "lucide-react";
+import { link } from "fs";
 
 export default function Index() {
   const careerStats = [
@@ -18,43 +19,47 @@ export default function Index() {
   const featuredJobs = [
     {
       id: 1,
-      title: "AI Research Scientist",
-      company: "TechGen Solutions",
-      location: "Bangalore, India",
+      title: "Software Engineer II, Full Stack",
+      company: "Google",
+      location: "Bengaluru, Karnataka, India",
       type: "Full-time",
       salary: "INR 1.2L - INR 1.5L",
       posted: "2 days ago",
       icon: Briefcase,
+      link: "https://www.google.com/about/careers/applications/jobs/results/128698460030280390",
     },
     {
       id: 2,
-      title: "Software Engineering Intern",
-      company: "InnovateTech",
-      location: "Remote",
+      title: "Internship AI",
+      company: "Airbus",
+      location: "Bangalore, India",
       type: "Internship",
       salary: "INR 20K - INR 30K",
       posted: "5 days ago",
       icon: Briefcase,
+      link: "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Bangalore-Area/Internship--AI_JR10327161?rx_campaign=Linkedin1&rx_ch=connector&rx_group=464134&rx_job=JR10327161&rx_medium=post&rx_r=none&rx_source=Linkedin&rx_ts=20250423T061206Z&rx_vp=slots&source=Recruitics_Linkedin&rx_viewer=1a0ba075fd4e11eebbe2a3198a2cb41fe35c0676b3f344d0aafc1a21084ceb83",
     },
     {
       id: 3,
-      title: "Data Analyst",
-      company: "DataDrive Inc.",
-      location: "Noida, India",
+      title: "Software Engineer II",
+      company: "Microsoft",
+      location: "Hyderabad, Telangana, India",
       type: "Full-time",
-      salary: "INR 80K - INR 1.2L",
+      salary: "INR 1.4 - INR 1.8L",
       posted: "1 day ago",
       icon: Briefcase,
+      link:"https://jobs.careers.microsoft.com/global/en/job/1820871/Software-Engineer-II",
     },
     {
       id: 4,
-      title: "UX/UI Design Intern",
-      company: "Creative Solutions",
-      location: "Hyderabad, India",
+      title: "R&D Software Engineer C++/Python Internship",
+      company: "Keysight Technologies",
+      location: "Gent, Belgium",
       type: "Internship",
-      salary: "INR 15K - INR 25K",
+      salary: "$15K - $25K",
       posted: "3 days ago",
       icon: Briefcase,
+      link: "https://jobs.keysight.com/external/jobs/45160?lang=en-us",
     },
   ];
 
@@ -168,7 +173,7 @@ export default function Index() {
                       </div>
                       <div className="mt-2 md:mt-0 flex items-center gap-4">
                         <span className="text-xs text-muted-foreground">{job.posted}</span>
-                        <Button variant="outline" size="sm">Apply</Button>
+                        <Button variant="outline" size="sm" onClick={() => window.open(job.link, "_blank", "noopener,noreferrer") }>Apply </Button>
                       </div>
                     </div>
                   ))}
