@@ -196,7 +196,15 @@ export default function Internships() {
                           <span>{internship.location}</span>
                         </div>
                       </div>
-                      <Button className="bg-purple-600 hover:bg-purple-700">Apply</Button>
+                      <Button
+  className="bg-purple-600 hover:bg-purple-700"
+  onClick={() =>
+    window.open(internship.link, "_blank", "noopener,noreferrer")
+  }
+>
+  Apply
+</Button>
+
                     </div>
                     
                     <p className="text-sm">{internship.description}</p>
