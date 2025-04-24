@@ -26,7 +26,7 @@ export default function Jobs() {
       posted: "2 days ago",
       type: "Full-time",
       requirements: [
-        "5+ years of experience",
+        "1+ years of experience",
         "React expertise",
         "Backend knowledge",
         "Team leadership",
@@ -36,10 +36,10 @@ export default function Jobs() {
     },
     {
       id: 2,
-      title: "Data Scientist",
-      company: "Analytics Pro",
-      location: "Boston, MA",
-      salary: "$110,000 - $140,000",
+      title: "Software Engineer II",
+      company: "Microsoft",
+      location: "Hyderabad, Telangana, India",
+      salary: "INR 110,000 - INR 140,000",
       description:
         "Join our data science team to build machine learning models that drive business decisions and create value from complex datasets.",
       posted: "1 week ago",
@@ -51,6 +51,8 @@ export default function Jobs() {
         "Data visualization",
       ],
       tags: ["Hybrid work", "Growth opportunity", "International team"],
+      link:"https://jobs.careers.microsoft.com/global/en/job/1820871/Software-Engineer-II",
+      
     },
     {
       id: 3,
