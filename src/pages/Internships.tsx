@@ -31,7 +31,7 @@ export default function Internships() {
       description: "Work on machine learning models to improve our recommendation engine and analyze user behavior patterns.",
       posted: "1 week ago",
       requirements: ["Statistics background", "Python", "Machine learning basics"],
-      tags: ["Fall 2025", "Data", "AI/ML"],
+      tags: ["Summer 2025", "Data", "AI/ML"],
       link: "https://www.naukri.com/job-listings-data-science-intern-excelptp-ahmedabad-0-to-1-years-100425019169?src=seo_srp&sid=17455083806077066&xp=1&px=1",
     },
     {
@@ -57,7 +57,7 @@ export default function Internships() {
       description: "Assist with social media campaigns, content creation, and marketing analytics for our clients.",
       posted: "5 days ago",
       requirements: ["Marketing student", "Social media knowledge", "Content creation skills"],
-      tags: ["Fall 2025", "Marketing", "Content"],
+      tags: ["Summer 2025", "Marketing", "Content"],
       link: "https://www.linkedin.com/jobs/collections/similar-jobs/?currentJobId=4206987442&originToLandingJobPostings=4206987442&referenceJobId=3949574407",
     },
     {
