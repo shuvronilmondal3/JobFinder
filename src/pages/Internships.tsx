@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,62 +11,67 @@ export default function Internships() {
     {
       id: 1,
       title: "Software Development Intern",
-      company: "Tech Innovations",
-      location: "San Francisco, CA (Hybrid)",
+      company: "ClearFeed",
+      location: "Bengaluru, Karnataka, India(Hybrid)",
       duration: "3 months",
-      stipend: "$25 - $30/hr",
+      stipend: "50k",
       description: "Join our engineering team to build features for our flagship product using React, Node.js and AWS.",
       posted: "3 days ago",
       requirements: ["Computer Science student", "React knowledge", "JavaScript proficiency"],
-      tags: ["Summer 2025", "Tech", "Engineering"]
+      tags: ["Summer 2025", "Tech", "Engineering"],
+      link: "https://www.linkedin.com/jobs/search/?currentJobId=4215322852&keywords=software%20development%20intern&originalSubdomain=in",
     },
     {
       id: 2,
       title: "Data Science Intern",
-      company: "Analytics Pro",
-      location: "Remote",
-      duration: "6 months",
-      stipend: "$28/hr",
+      company: "EXCELPTP",
+      location: "Ahmedabad",
+      duration: "1 months",
+      stipend: "Unpaid",
       description: "Work on machine learning models to improve our recommendation engine and analyze user behavior patterns.",
       posted: "1 week ago",
       requirements: ["Statistics background", "Python", "Machine learning basics"],
-      tags: ["Fall 2025", "Data", "AI/ML"]
+      tags: ["Fall 2025", "Data", "AI/ML"],
+      link: "https://www.naukri.com/job-listings-data-science-intern-excelptp-ahmedabad-0-to-1-years-100425019169?src=seo_srp&sid=17455083806077066&xp=1&px=1",
     },
     {
       id: 3,
       title: "UX/UI Design Intern",
-      company: "Creative Digital",
-      location: "New York, NY (On-site)",
-      duration: "4 months",
-      stipend: "$22/hr",
+      company: "CC Yard Private Limited",
+      location: "Bangalore",
+      duration: "2 months",
+      stipend: "₹ 12,000 - 15,000 /month",
       description: "Create wireframes, prototypes, and visual designs for our client projects across various industries.",
       posted: "2 days ago",
       requirements: ["Design portfolio", "Figma proficiency", "User research experience"],
-      tags: ["Summer 2025", "Design", "Creative"]
+      tags: ["Summer 2025", "Design", "Creative"],
+      link: "https://internshala.com/internship/detail/ux-ui-design-internship-in-bangalore-at-cc-yard-private-limited1745495920",
     },
     {
       id: 4,
       title: "Marketing Intern",
-      company: "Brand Forward",
-      location: "Chicago, IL (Hybrid)",
+      company: "HINDCO Consultancy Services",
+      location: "India",
       duration: "3 months",
-      stipend: "$20/hr",
+      stipend: "20k/month",
       description: "Assist with social media campaigns, content creation, and marketing analytics for our clients.",
       posted: "5 days ago",
       requirements: ["Marketing student", "Social media knowledge", "Content creation skills"],
-      tags: ["Fall 2025", "Marketing", "Content"]
+      tags: ["Fall 2025", "Marketing", "Content"],
+      link: "https://www.linkedin.com/jobs/collections/similar-jobs/?currentJobId=4206987442&originToLandingJobPostings=4206987442&referenceJobId=3949574407",
     },
     {
       id: 5,
       title: "Product Management Intern",
-      company: "ProductLaunch",
-      location: "Austin, TX (On-site)",
-      duration: "6 months",
-      stipend: "$26/hr",
+      company: "Amber",
+      location: "Pune, Maharashtra, India",
+      duration: "2 months",
+      stipend: "26k",
       description: "Work with cross-functional teams to define product requirements and improve the user experience.",
       posted: "1 day ago",
       requirements: ["Product thinking", "Technical aptitude", "Communication skills"],
-      tags: ["Spring 2025", "Product", "Business"]
+      tags: ["Spring 2025", "Product", "Business"],
+      link: "https://www.linkedin.com/jobs/search/?currentJobId=4138363613&keywords=product%20management%20internship&originalSubdomain=in",
     }
   ];
 
